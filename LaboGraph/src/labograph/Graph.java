@@ -32,11 +32,11 @@ public class Graph {
         graph[pt2][pt1]--;
     }
     
-    public int rechercherLigne(int[] valeur){
+    public int rechercherLigne(int[] valeur, int index){
         int[] valeursRecherche = getValeurs(valeur);
         int[] valeurGraph;
         boolean ok = false;
-        for(int i = 0 ; i < TAILLE && !ok ; i++){
+        for(int i = index ; i < TAILLE && !ok ; i++){
             int[] ligneGraph = new int[TAILLE];
             for(int j = 0 ; j < TAILLE ; j++){
                 ligneGraph[j] = graph[i][j];
@@ -52,10 +52,10 @@ public class Graph {
         return -1;
     }
     
-    public int rechercherCol(int[] valeur){
-        int[] valeursRecherche = getValeurs(valeur);
+    public int rechercherCol(int[] valeurs, int index){
+        int[] valeursRecherche = getValeurs(valeurs);
         int[] valeurGraph;
-        for(int i = 0 ; i < TAILLE; i++){
+        for(int i = index ; i < TAILLE; i++){
             int[] ligneGraph = new int[TAILLE];
             for(int j = 0 ; j < TAILLE ; j++){
                 ligneGraph[j] = graph[j][i];
