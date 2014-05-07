@@ -5,11 +5,18 @@ import java.awt.Point;
 public class Graph {
     
     int[][] graph;
+    Graph cycle;
     private final int TAILLE;
     
-    public Graph(int x){
-        graph = new int[x][x];
-        TAILLE = x;
+    public Graph(int TAILLE){
+        graph = new int[TAILLE][TAILLE];
+        this.TAILLE = TAILLE;
+        cycle = new Graph(TAILLE);
+    }
+    
+    public Graph(int[][] graph, int TAILLE){
+        this.TAILLE = TAILLE;
+        this.graph = graph;
     }
     
     public void setPoint(int x, int y, int valeur){
@@ -18,6 +25,11 @@ public class Graph {
     
     public int getTaille(){
         return TAILLE;
+    }
+    
+    private void retirerArc(int pt1, int pt2){
+        graph[pt1][pt2]--;
+        graph[pt2][pt1]--;
     }
     
     public int rechercherLigne(int[] valeur){
@@ -43,8 +55,7 @@ public class Graph {
     public int rechercherCol(int[] valeur){
         int[] valeursRecherche = getValeurs(valeur);
         int[] valeurGraph;
-        boolean ok = false;
-        for(int i = 0 ; i < TAILLE && !ok ; i++){
+        for(int i = 0 ; i < TAILLE; i++){
             int[] ligneGraph = new int[TAILLE];
             for(int j = 0 ; j < TAILLE ; j++){
                 ligneGraph[j] = graph[j][i];
@@ -82,6 +93,17 @@ public class Graph {
     
     public int getValeur(Point p){
         return getValeur((int)p.getX(), (int)p.getY());
+    }
+    
+    public Graph retirerBranchesCycle(Cycle c){
+        int pt1 = c.getNext();
+        int pt2;
+        while(c.hasNext()){
+            pt2 = c.getNext();
+            cycle.retirerArc(pt1, pt2);
+            pt1 = pt2;
+        }
+        return cycle;
     }
     
     public void echangerligne(int ligne1, int ligne2){
