@@ -32,6 +32,22 @@ public class Graph {
         graph[pt2][pt1]--;
     }
     
+    public int[] getLigne(int index){
+        int[] ligne = new int[TAILLE];
+        for(int i  = 0 ; i < TAILLE ; i++){
+            ligne[i] = graph[index][i];
+        }
+        return ligne;
+    }
+    
+    public int[] getCol(int index){
+        int[] colonne = new int[TAILLE];
+        for(int i = 0 ; i < TAILLE ; i++){
+            colonne[i] = graph[i][index];
+        }
+        return colonne;
+    }
+    
     public int rechercherLigne(int[] valeur, int index){
         int[] valeursRecherche = getValeurs(valeur);
         int[] valeurGraph;
@@ -39,7 +55,7 @@ public class Graph {
         for(int i = index ; i < TAILLE && !ok ; i++){
             int[] ligneGraph = new int[TAILLE];
             for(int j = 0 ; j < TAILLE ; j++){
-                ligneGraph[j] = graph[i][j];
+                ligneGraph[j] = graph[j][i];
             }
             valeurGraph = getValeurs(ligneGraph);
             for(int j = 0 ; j < valeurGraph.length ; j++){
@@ -58,7 +74,7 @@ public class Graph {
         for(int i = index ; i < TAILLE; i++){
             int[] ligneGraph = new int[TAILLE];
             for(int j = 0 ; j < TAILLE ; j++){
-                ligneGraph[j] = graph[j][i];
+                ligneGraph[j] = graph[i][j];
             }
             valeurGraph = getValeurs(ligneGraph);
             for(int j = 0 ; j < valeurGraph.length ; j++){
@@ -106,19 +122,19 @@ public class Graph {
         return cycle;
     }
     
-    public void echangerligne(int ligne1, int ligne2){
+    public void echangerCol(int col1, int col2){
         for(int i = 0 ; i < TAILLE ; i++){
-            int temp = graph[ligne1][i];
-            graph[ligne1][i] = graph[ligne2][i];
-            graph[ligne2][i] = temp;
+            int temp = graph[col1][i];
+            graph[col1][i] = graph[col2][i];
+            graph[col2][i] = temp;
         }
     }
     
-    public boolean echangerColonne(int colonne1, int colonne2){
+    public boolean echangerligne(int ligne1, int ligne2){
         for(int i = 0 ; i < TAILLE ; i++){
-            int temp = graph[i][colonne1];
-            graph[i][colonne1] = graph[i][colonne2];
-            graph[i][colonne2] = temp;
+            int temp = graph[i][ligne1];
+            graph[i][ligne1] = graph[i][ligne2];
+            graph[i][ligne2] = temp;
         }
         return true;
     }
