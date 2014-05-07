@@ -12,6 +12,14 @@ public class Graph {
         TAILLE = x;
     }
     
+    public void setPoint(int x, int y, int valeur){
+        graph[x][y] = valeur;
+    }
+    
+    public int getTaille(){
+        return TAILLE;
+    }
+    
     public int rechercherLigne(int[] valeur){
         int[] valeursRecherche = getValeurs(valeur);
         int[] valeurGraph;
@@ -58,6 +66,14 @@ public class Graph {
             valeurs[i]++;
         }
         return valeurs;
+    }
+    
+    public int getDegre(int point){
+        int degre = 0;
+        for(int j = 0 ; j < TAILLE ; j++){
+            degre += graph[point][j];
+        }
+        return degre;
     }
     
     public int getValeur(int x, int y){

@@ -8,10 +8,18 @@ public class AnalyseurGraph {
     private Graph g;
     
     private boolean detecterCycleEuclerien(Graph g){
-        return false;
+        for(int i = 0 ; i < g.getTaille() ; i++){
+            if(g.getDegre(i)%2 != 0){
+                return false;
+            }
+        }
+        return true;
     }
     
     public ArrayList<Point> getCycleEuclerien(Graph g){
+        if(detecterCycleEuclerien(g)){
+            
+        }
         return null;
     }
     
@@ -20,5 +28,8 @@ public class AnalyseurGraph {
     }
     
     public void getFonction(Graph g, Graph _g){
+        if(detecterIsomorphe(g, _g)){
+            
+        }
     }
 }
