@@ -4,5 +4,8 @@
 *.properties
 
 *.mf
+
+*.class
+
 /LaboGraph/build/
 /LaboGraph/dist/
